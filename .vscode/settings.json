@@ -1,0 +1,28 @@
+{
+    "jshint.config": {
+        "esversion": 6
+    },
+
+    "beautify.language": {
+        "js": {
+            "type": [
+                "javascript",
+                "json"
+            ],
+            "filename": [
+                ".jshintrc",
+                ".jsbeautify"
+            ]
+        },
+        "css": [
+            "css",
+            "scss"
+        ],
+        "html": [
+            "html",
+            "htm",
+            "jade",
+            "pug"
+        ]
+    }
+}
