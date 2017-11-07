@@ -1,4 +1,5 @@
 module.exports = {
+    "extends": "google",
     "parser": "babel-eslint",
     "env": {
         "browser": true,
@@ -22,4 +23,4 @@ module.exports = {
         "constructor-super": "warn",
         "valid-typeof": "warn"
     }
-}
+};
