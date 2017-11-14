@@ -17,8 +17,8 @@ class App extends React.Component {
                   * [1] content using props.contest.map
                   */}
                 <div className="container-fluid" style={{marginTop: '8rem'}}>
-                    {this.props.contest.map( contest => 
-                        <ContestPreview {...contest} />
+                    {this.props.contest.map( (contest, index) => 
+                        <ContestPreview key={index} {...contest} />
                     )}
                 </div>
             </div>
