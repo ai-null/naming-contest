@@ -1,0 +1,24 @@
+{
+    "contest": [
+        {
+            "id": 1,
+            "categoryName": "Business/Company",
+            "contestName": "Cognitive building bricks"
+        },
+        {
+            "id": 2,
+            "categoryName": "Anime/Otaku's",
+            "contestName": "All about anime and japan fans"
+        },
+        {
+            "id": 3,
+            "categoryName": "Wota",
+            "contestName": "Something who they call \"Idol\" is the best for them"
+        },
+        {
+            "id": 4,
+            "categoryName": "Software Component",
+            "contestName": "Bid Data analytic for code or programmer"
+        }
+    ]
+}
