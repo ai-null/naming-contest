@@ -1,13 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDom from 'react-dom';
+//Component
 import App from './components/App';
-import testData from './testData';
-
-let { contest } = testData;
-
-console.log(contest);
+import data, { contest } from './testData';
 
 ReactDom.render(
-    <App contest={contest} /> ,
+    <App contest={contest} />,
     document.getElementById('root')
 );

@@ -1,7 +1,7 @@
 {
-  "name": "posted-memories",
+  "name": "naming-contest",
   "version": "1.0.0",
-  "description": "posted-memories",
+  "description": "naming-contest",
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node server.js --ignore public/",
@@ -21,10 +21,12 @@
   },
   "homepage": "https://github.com/MAinulYaqin/posted-memories#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "json-loader": "^0.5.7",
     "mongodb": "^2.2.33",
+    "node-sass-middleware": "^0.11.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },

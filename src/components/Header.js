@@ -1,18 +1,22 @@
 import React from 'react';
 
-//  Navbar Components
+/**
+ * 
+ * @param {brand} string
+ *      - Brand name 
+ */
 const Header = ({Brand}) => {
-    // Will return navbar
+    // will return the value
     return (
-        <div className="nav navbar navbar-fixed-top bg-primary">
-            <span className="navbar-brand"> {Brand} </span>
+        <div className="navbar navbar-fixed-top bg-primary">
+            <div className="navbar-brand"> { Brand } </div>
         </div>
     );
-};
+}
 
-// Default value of brand
+// Default props value
 Header.defaultProps = {
-    brand: 'Naming Contest',
-};
+    Brand: 'Naming Contest',
+}
 
-export default Header;
+module.exports = Header;

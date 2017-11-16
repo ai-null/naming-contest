@@ -1,16 +1,16 @@
 import React from 'react';
 
-const ContestPreview = (contest) => {
+const ContestPreview = (data) => {
     return (
-        <div>
+        <div className="contestPreview container">
             <div className="categoryName">
-                <p> { contest.categoryName } </p>
+                { data.categoryName }
             </div>
-            <div className="categoryName">
-                <p> { contest.contestName } </p>
+            <div className="contestName">
+                { data.contestName }
             </div>
         </div>
     );
 }
 
-export default ContestPreview;
+module.exports = ContestPreview;

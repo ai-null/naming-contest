@@ -1,29 +1,25 @@
-import React from 'react';
-// Navbar section
+import React, { Component } from 'react';
 import Header from './Header';
-// data Json
-import ContestPreview from './ContestPreview';
+import ContestPreview from './ContestPreview'
 
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            brand: 'Naming Contest'
+        }
+    }
 
-class App extends React.Component {
     render() {
         return (
             <div className="App">
-                {/* Header - Navbar */}
-                <Header Brand="Naming Contest" />
-                {/* 
-                  * @container-fluid is contain
-                  * 
-                  * [1] content using props.contest.map
-                  */}
-                <div className="container-fluid" style={{marginTop: '8rem'}}>
-                    {this.props.contest.map( (contest, index) => 
-                        <ContestPreview key={index} {...contest} />
+                <Header Brand={this.state.brand} />
+                <div className="container">
+                    {this.props.contest.map(contest =>
+                        <ContestPreview key={contest.id} {...contest} />
                     )}
                 </div>
             </div>
         );
-    };
-};
-
-export default App;
+    }
+}

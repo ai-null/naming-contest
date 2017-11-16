@@ -1,10 +1,11 @@
 import express from 'express';
+import data, { contest } from '../src/testData';
 
-const Router = express.Router();
+var Router = express.Router();
 
-Router.get('/', (req, res) => {
+Router.get('/contest', (req, res) => {
     res.json({
-        data: []
+        data: contest
     });
 });
 
