@@ -1,5 +1,10 @@
 import React from 'react';
 
+/**
+ * 
+ * @param {*json array-object} data
+ *      - take one parameter, and returning inside here 
+ */
 const ContestPreview = (data) => {
     return (
         <div className="contestPreview container">

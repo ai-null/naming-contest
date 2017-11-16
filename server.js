@@ -4,6 +4,7 @@ import path from 'path';
 
 import config from './config';
 import index from './route/index';
+import api from './api/index';
 
 var app = express();
 
@@ -16,7 +17,9 @@ app.use(nodeSass({
     dest: path.join(__dirname + '/public')
 }));
 
+//Router
 app.use('/', index)
+app.use('/api', api)
 
 app.use(express.static('public'));
 
