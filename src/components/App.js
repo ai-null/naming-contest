@@ -10,7 +10,7 @@ export default class App extends Component {
         super(props);
         this.state = {
             brand: 'Naming Contest',
-            contests: []
+            contests: this.props.initialContest
         }
     }
 

@@ -2,17 +2,17 @@ import React from 'react';
 
 /**
  * 
- * @param {*json array-object} data
+ * @param {*json array-object} contest
  *      - take one parameter, and returning inside here 
  */
-const ContestPreview = (data) => {
+const ContestPreview = (contest) => {
     return (
         <div className="contestPreview container">
             <div className="categoryName">
-                { data.categoryName }
+                { contest.categoryName }
             </div>
             <div className="contestName">
-                { data.contestName }
+                { contest.contestName }
             </div>
         </div>
     );

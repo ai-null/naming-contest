@@ -23,6 +23,6 @@ app.use('/api', api)
 
 app.use(express.static('public'));
 
-app.listen(config.port, () => {
+app.listen(config.port, config.host,() => {
     console.log(`something happen on port ${config.port}`);
 });
