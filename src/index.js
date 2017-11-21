@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-//Component
+// Component
 import App from './components/App';
-import data, { contest } from './testData';
 
-ReactDom.render(
-    <App contest={contest} />,
+ReactDom.hydrate(
+    <App initialContest={[]} />,
     document.getElementById('root')
 );

@@ -20,8 +20,8 @@ body{
         padding: 1rem 0 1.4rem 15px;
         background: #fff
     }
-}
-
-.contestPreview:first-child {
-    margin-top: 8rem
+    
+    &:first-child {
+        margin-top: 8rem
+    }
 }

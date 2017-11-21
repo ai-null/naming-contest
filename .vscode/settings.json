@@ -1,3 +1,13 @@
 {
-    "eslint.autoFixOnSave": true
+    "eslint.autoFixOnSave": true,
+    "emojisense.languages": {
+        "markdown": true,
+        "plaintext": {
+            "markupCompletionsEnabled": false,
+            "emojiDecoratorsEnabled": false
+        },
+        "html": true,
+        "git-commit": true
+    },
+    "eslint.enable": false
 }

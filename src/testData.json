@@ -2,8 +2,8 @@
     "contest": [
         {
             "id": 1,
-            "categoryName": "Business/Company",
-            "contestName": "Cognitive building bricks"
+            "categoryName": "Coding",
+            "contestName": "Writing computer code and make some program with it"
         },
         {
             "id": 2,
