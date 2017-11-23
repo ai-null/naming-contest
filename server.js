@@ -6,7 +6,6 @@ import serverRender from './serverRender';
 import config, { port, host } from './config';
 import api from './api/index';
 import index from './route/index';
-import api from './api/index';
 
 var app = express();
 
@@ -20,18 +19,6 @@ app.use(nodeSass({
 }));
 
 //Router
-<<<<<<< HEAD
-app.use('/', index);
-/**
- * API includding data from testData.json
- */
-app.use('/api', api);
-
-app.use(express.static('public'));
-
-app.listen(port, host,() => {
-    console.log(`something happen on port ${port}`);
-=======
 app.use('/', index)
 app.use('/api', api)
 
@@ -39,5 +26,4 @@ app.use(express.static('public'));
 
 app.listen(config.port, config.host,() => {
     console.log(`something happen on port ${config.port}`);
->>>>>>> 454ae607f39fcceb2ef147695ddbbba64a37c079
 });
