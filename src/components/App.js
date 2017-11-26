@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
+import Contest from './Contest';
 import Header from './Header';
 import ContestList from './ContestList';
 import data, {contest} from '../testData';
@@ -21,11 +22,28 @@ export default class App extends Component {
         };
     }
 
-    fetchContest = ( contestId ) => {
+    fetchContest = (contestId) => {
         pushState(
-            { currentId: contestId },
+            {currentId: contestId},
             `/contest/${contestId}`
         )
+    
+        this.setState({
+            brand: this.state.contests[contestId].categoryName,
+            currentContestId: contestId
+        })
+    }
+
+    currentContest() {
+        if (this.state.currentContestId) {
+            return (
+                <Contest {...this.state.contests[this.state.currentContestId]} />
+            )
+        }
+        
+        return <ContestList 
+            contest={this.state.contests} 
+            onContestClick={this.fetchContest}/>
     }
 
     render() {
@@ -34,10 +52,7 @@ export default class App extends Component {
         return (
             <div className="App">
                 <Header Brand={this.state.brand} />
-                <ContestList 
-                    contest={this.state.contests} 
-                    onContestClick={this.fetchContest}
-                />
+                { this.currentContest() }
             </div>
         )
     }

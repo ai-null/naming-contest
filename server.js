@@ -2,6 +2,7 @@ import express from 'express';
 import nodeSass from 'node-sass-middleware';
 import path from 'path';
 
+// import data, { contest } from './src/testData.json';
 import serverRender from './serverRender';
 import config, { port, host } from './config';
 import api from './api/index';

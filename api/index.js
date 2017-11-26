@@ -1,13 +1,17 @@
 import express from 'express';
 // same as data.contest
-import data, { contest } from '../src/testData';
+import { contest } from '../src/testData.json';
 
-let Router = express.Router();
+const Router = express.Router();
+const data = contest.reduce((obj, contest) => {
+                obj[contest.id] = contest;
+                return obj;
+            }, {})
 
 // Returning the json array object
 Router.get('/contest', (req, res) => {
     res.json({
-        data: contest,
+        data: data
     });
 });
 

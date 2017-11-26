@@ -1,6 +1,7 @@
 import React from 'react';
 import ContestPreview from './ContestPreview';
-import PropTypes from 'prop-types';
+import propTypes, { object } from 'prop-types';
+import { Script } from 'vm';
 
 const ContestList = ({contest, onContestClick}) => (
     <div className="container">
@@ -8,19 +9,21 @@ const ContestList = ({contest, onContestClick}) => (
             * contests from this.state = { object }
             *  - contest type should be array-object
             */}
-        {contest.map(contest =>
-            <ContestPreview 
-                key={contest.id}
-                onClick={onContestClick}
-                {...contest}
-            />
-        )}
+        {
+            Object.keys(contest).map(contestId => 
+                <ContestPreview
+                    key={contestId}
+                    onClick={onContestClick}
+                    {...contest[contestId]}
+                />
+            )
+        }
     </div>
 )
 
-ContestList.protoTypes = {
-    contest: PropTypes.array,
-    onContestClick: PropTypes.func.isRequired
+ContestList.protTypes = {
+    contest: propTypes.object,
+    onContestClick: propTypes.func.isRequired
 }
 
 module.exports = ContestList;

@@ -7,8 +7,9 @@ import propTypes from 'prop-types';
  *      - take one parameter, and returning inside here 
  */
 class ContestPreview extends Component {
+
     handleClick = () => {
-        this.props.onClick(this.props.id)
+        this.props.onClick(this.props.id)        
     }
     
     render() {
@@ -29,8 +30,10 @@ class ContestPreview extends Component {
 }
 
 ContestPreview.propTypes = {
+    id: propTypes.number.isRequired,
     categoryName: propTypes.string.isRequired,
-    contestName: propTypes.string.isRequired
+    contestName: propTypes.string.isRequired,
+    onClick: propTypes.func.isRequired,    
 }
 
 module.exports = ContestPreview;
