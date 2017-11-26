@@ -1,19 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
 
 /**
  * 
  * @param {*json array-object} contest
  *      - take one parameter, and returning inside here 
  */
-const ContestPreview = (contest) => (
-    <div className="contestPreview container">
-        <div className="categoryName">
-            { contest.categoryName }
-        </div>
-        <div className="contestName">
-            { contest.contestName }
-        </div>
-    </div>
-)
+class ContestPreview extends Component {
+    handleClick = () => {
+        this.props.onClick(this.props.id)
+    }
+    
+    render() {
+        return (
+            <div className="link contestPreview container" onClick={this.handleClick}>
+                {/**
+                 * the data will be take from COntestList {...contest}
+                 */}
+                <div className="categoryName">
+                    { this.props.categoryName }
+                </div>
+                <div className="contestName">
+                    { this.props.contestName }
+                </div>
+            </div>
+        )
+    }
+}
+
+ContestPreview.propTypes = {
+    categoryName: propTypes.string.isRequired,
+    contestName: propTypes.string.isRequired
+}
 
 module.exports = ContestPreview;

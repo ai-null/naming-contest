@@ -11,7 +11,7 @@ import App from './components/App';
      *          that url
      *      - then.. if the data is err, component won't mounting
      */
-    debugger
+    // debugger
     axios.get('/api/contest')
     .then(resp => {
         ReactDom.render(

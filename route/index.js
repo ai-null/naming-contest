@@ -6,7 +6,7 @@ var router = express.Router();
 import serverRender from '../serverRender';
 
 router.get('/', (req, res) => {
-    debugger
+    // debugger
     serverRender()
         .then(content => {
             res.render('index', {
