@@ -9,7 +9,7 @@ export default class Contest extends Component {
                 Current id : { this.props.id }
             </div>
         )
-    } 
+    }
 }
 
 Contest.propTypes = {
