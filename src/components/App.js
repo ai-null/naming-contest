@@ -22,7 +22,18 @@ export default class App extends Component {
             contests: this.props.initialContest
         };
     }
-
+    
+    /**
+     * fetchContest will trigger if the url changed to 
+     * /contest/{id-of-data}
+     * 
+     * @param {*params for id of data} fetchContest
+     * @returns Parsing data of the contest
+     * 
+     * pushState will returning the contestId / id of data
+     * 
+     * fetchAPI will processing data to a new state
+     */
     fetchContest = (contestId) => {
         // debugger
         pushState(
@@ -30,43 +41,42 @@ export default class App extends Component {
             `/contest/${contestId}`
         );
 
-        api.fetchContest(contestId).then(contest => {
+        api.fetchContest(contestId).then(resp => {
             this.setState({
-                brand: contest.categoryName,
-                currentContestId: contest.id,
+                brand: this.state.contests[contestId].categoryName,
+                currentContestId: contestId,
                 contests: {
-                    ...this.state.contests,
-                    [contest.id]: contest
+                    ...this.state.contests[contestId],
+                    [resp.id]: resp
                 }
-            });
-        });
+            })
+            // console.log(resp)
+        })
     }
 
+    /**
+     * if the fetchContest doesn't clicked, this will return ContestList
+     * if done, will return Contest
+     */
     currentContest() {
         if (this.state.currentContestId) {
-            return (
-                <Contest {...this.state.contests[this.state.currentContestId]} />
-            )
+            return <Contest { ...this.state.contests[this.state.currentContestId] }  />
         }
 
         return <ContestList 
-            contest={this.state.contests} 
-            onContestClick={this.fetchContest}/>
+                contest={this.state.contests} 
+                onContestClick={this.fetchContest}/>
     }
 
     render() {
-        console.log(this.state.contests);
-        debugger
+        // console.log(this.state.contests);
+        // debugger
         return (
             <div className="App">
                 <Header Brand={this.state.brand} />
+
                 { this.currentContest() }
             </div>
         )
     }
-}
-
-App.propTypes = {
-    brand: PropTypes.string,
-    contest: PropTypes.object
 }
