@@ -22,7 +22,7 @@ export default class App extends Component {
             contests: this.props.initialContest
         };
     }
-    
+
     fetchContest = (contestId) => {
         // debugger
         pushState(
@@ -30,13 +30,13 @@ export default class App extends Component {
             `/contest/${contestId}`
         );
 
-        api.fetchContest(contestId).then(contests => {
+        api.fetchContest(contestId).then(contest => {
             this.setState({
-                brand: contests.categoryName,
-                currentContestId: contests.id,
+                brand: contest.categoryName,
+                currentContestId: contest.id,
                 contests: {
                     ...this.state.contests,
-                    [contest.id]: contests
+                    [contest.id]: contest
                 }
             });
         });
@@ -48,7 +48,7 @@ export default class App extends Component {
                 <Contest {...this.state.contests[this.state.currentContestId]} />
             )
         }
-        
+
         return <ContestList 
             contest={this.state.contests} 
             onContestClick={this.fetchContest}/>
@@ -56,7 +56,7 @@ export default class App extends Component {
 
     render() {
         console.log(this.state.contests);
-        // debugger
+        debugger
         return (
             <div className="App">
                 <Header Brand={this.state.brand} />
