@@ -6,6 +6,7 @@ import Contest from './Contest';
 import Header from './Header';
 import ContestList from './ContestList';
 import data, {contest} from '../testData';
+import * as api from '../api';
 
 const pushState = (obj, url) =>
     window.history.pushState(obj, '', url)
@@ -23,15 +24,22 @@ export default class App extends Component {
     }
 
     fetchContest = (contestId) => {
+        // debugger
         pushState(
             {currentId: contestId},
             `/contest/${contestId}`
-        )
-    
-        this.setState({
-            brand: this.state.contests[contestId].categoryName,
-            currentContestId: contestId
-        })
+        );
+
+        api.fetchContest(contestId).then(contest => {
+            this.setState({
+                brand: contest.categoryName,
+                currentContestId: contest.id,
+                contests: {
+                    ...this.state.contests,
+                    [contest.id]: contest
+                }
+            });
+        });
     }
 
     currentContest() {
@@ -40,15 +48,15 @@ export default class App extends Component {
                 <Contest {...this.state.contests[this.state.currentContestId]} />
             )
         }
-        
+
         return <ContestList 
             contest={this.state.contests} 
             onContestClick={this.fetchContest}/>
     }
 
     render() {
-        // console.log(this.state.contests)
-        // // debugger
+        console.log(this.state.contests);
+        debugger
         return (
             <div className="App">
                 <Header Brand={this.state.brand} />

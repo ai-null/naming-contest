@@ -1,7 +1,6 @@
 import React from 'react';
 import ContestPreview from './ContestPreview';
 import propTypes, { object } from 'prop-types';
-import { Script } from 'vm';
 
 const ContestList = ({contest, onContestClick}) => (
     <div className="container">

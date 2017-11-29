@@ -6,12 +6,14 @@ export default class Contest extends Component {
     render() {
         return(
             <div className="contest container">
-                Current id : { this.props.id }
+                <section className="text-justify">
+                    { this.props.description }
+                </section>
             </div>
         )
     }
 }
 
 Contest.propTypes = {
-    id: PropTypes.number.isRequired
+    description: PropTypes.string.isRequired
 }
