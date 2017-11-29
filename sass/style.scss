@@ -7,7 +7,11 @@ body{
 }
 
 .navbar-brand {
-    cursor: default
+    cursor: default;
+
+    &::selection {
+        background-color: transparent
+    }
 }
 
 .contest {

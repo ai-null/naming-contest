@@ -6,6 +6,8 @@ body {
 
 .navbar-brand {
   cursor: default; }
+  .navbar-brand::selection {
+    background-color: transparent; }
 
 .contest {
   margin-top: 10.5rem; }
