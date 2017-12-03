@@ -18,7 +18,6 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            brand: 'Naming Contest',
             contests: this.props.initialContest
         };
     }
@@ -43,7 +42,7 @@ export default class App extends Component {
 
         api.fetchContest(contestId).then(resp => {
             this.setState({
-                brand: this.state.contests[contestId].categoryName,
+                brand: this.state.contests[contestId].contestName,
                 currentContestId: contestId,
                 contests: {
                     ...this.state.contests[contestId],
@@ -54,11 +53,21 @@ export default class App extends Component {
         })
     }
 
+    currentContest(){
+        return this.state.contests[this.state.currentContest];
+    }
+
+    pageHader() {
+        if(this.state.currentContestId) {
+            return {...this.state.contests.categoryName}
+        }
+    }
+
     /**
      * if the fetchContest doesn't clicked, this will return ContestList
      * if done, will return Contest
      */
-    currentContest() {
+    currentContent() {
         if (this.state.currentContestId) {
             return <Contest { ...this.state.contests[this.state.currentContestId] }  />
         }
@@ -75,7 +84,7 @@ export default class App extends Component {
             <div className="App">
                 <Header Brand={this.state.brand} />
 
-                { this.currentContest() }
+                { this.currentContent() }
             </div>
         )
     }

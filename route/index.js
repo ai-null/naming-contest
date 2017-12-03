@@ -8,11 +8,12 @@ import serverRender from '../serverRender';
 router.get('/', (req, res) => {
     // debugger
     serverRender()
-        .then(content => {
+        .then(({ initialMarkup, initialData }) => {
             res.render('index', {
                 title: 'Hello React',
-                content
-            })
+                initialMarkup,
+                initialData
+            });
         })
         .catch(err => console.log(err))
 });

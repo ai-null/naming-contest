@@ -1,4 +1,8 @@
 <%- include('header') %>
-    <noscript><%- content %></noscript>
+    <noscript><%- initialMarkup %></noscript>
     <div id="root"></div>
+
+    <script>
+        window.initialData = <%- JSON.stringify(initialData) %>
+    </script>
 <%- include('footer') %>

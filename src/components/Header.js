@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
 /**
  * 
@@ -17,6 +18,10 @@ const Header = ({Brand}) => {
 // Default props value
 Header.defaultProps = {
     Brand: 'Naming Contest',
+}
+
+Header.propTypes = {
+    Brand: propTypes.string.isRequired
 }
 
 module.exports = Header;
