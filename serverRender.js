@@ -6,15 +6,47 @@ import config, { ServerUrl } from './config';
 
 import App from './src/components/App';
 
-const serverRender = () => 
-    axios.get(`${ServerUrl}/api/contest`)
-        .then(resp => {
-            return {
-                initialMarkup: ReactDOMServer.renderToString(
-                    <App initialContest={resp.data.data} />,
-                ),
+const getApiUrl = contestId => {
+    if (contestId) {
+        return `${ServerUrl}/api/contest/${contestId}`
+    }
 
-                initialData: resp.data
+    return `${ServerUrl}/api/contest`
+}
+
+const getInitialData = ( contestId, apiData ) => {
+    if (contestId) {
+        return {
+            currentContestId: apiData.id,
+            contest: {
+                [apiData.id]: apiData
+            }
+        }
+    }
+
+    return {
+        contest: apiData.data
+    }
+}
+
+/**
+ * 
+ * @param {*string} contestId 
+ * - the serverRender take one param, a string url
+ *      and the url give it from getApiUrl function up there
+ *      and will return a json object
+ */
+const serverRender = (contestId) => 
+    axios.get(getApiUrl(contestId))
+        .then(resp => {
+            let initialData = getInitialData(contestId, resp.data)
+            return {
+                // noscript
+                initialMarkup: ReactDOMServer.renderToString(
+                    <App initialData={initialData} />,
+                ),
+                // JSON.stringify
+                initialData
             }
         })
 

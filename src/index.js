@@ -4,8 +4,8 @@ import ReactDom from 'react-dom';
 import App from './components/App';
 
 
-// debugger
+// // debugger
 ReactDom.render(
-    <App initialContest={window.initialData.data} />,
+    <App initialData={window.initialData.contest} />,
     document.getElementById('root')
 );

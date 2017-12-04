@@ -17,9 +17,14 @@ const pushState = (obj, url) =>
 export default class App extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            contests: this.props.initialContest
+            contests: this.props.initialData
         };
+    }
+
+    static propTypes = {
+        initialData: PropTypes.object.isRequired   
     }
     
     /**
@@ -34,7 +39,7 @@ export default class App extends Component {
      * fetchAPI will processing data to a new state
      */
     fetchContest = (contestId) => {
-        // debugger
+        // // debugger
         pushState(
             {currentId: contestId},
             `/contest/${contestId}`
@@ -42,7 +47,7 @@ export default class App extends Component {
 
         api.fetchContest(contestId).then(resp => {
             this.setState({
-                brand: this.state.contests[contestId].contestName,
+                // Brand: this.pageHeader(),
                 currentContestId: contestId,
                 contests: {
                     ...this.state.contests[contestId],
@@ -54,22 +59,22 @@ export default class App extends Component {
     }
 
     currentContest(){
-        return this.state.contests[this.state.currentContest];
+        return this.state.contests[this.state.currentContestId];
     }
 
-    pageHader() {
+    pageHeader() {
         if(this.state.currentContestId) {
-            return {...this.state.contests.categoryName}
+            return this.currentContest().categoryName;
         }
     }
 
     /**
-     * if the fetchContest doesn't clicked, this will return ContestList
-     * if done, will return Contest
+     * if the fetchContest was not clicked, it will return the ContestList
+     * if clicked, will return Contest
      */
     currentContent() {
         if (this.state.currentContestId) {
-            return <Contest { ...this.state.contests[this.state.currentContestId] }  />
+            return <Contest { ...this.currentContest() }  />
         }
 
         return <ContestList 
@@ -82,7 +87,7 @@ export default class App extends Component {
         // debugger
         return (
             <div className="App">
-                <Header Brand={this.state.brand} />
+                <Header Brand={this.pageHeader()} />
 
                 { this.currentContent() }
             </div>

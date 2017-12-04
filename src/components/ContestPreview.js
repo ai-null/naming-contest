@@ -33,7 +33,7 @@ ContestPreview.propTypes = {
     id: propTypes.number.isRequired,
     categoryName: propTypes.string.isRequired,
     contestName: propTypes.string.isRequired,
-    onClick: propTypes.func.isRequired,    
+    onClick: propTypes.func.isRequired
 }
 
 module.exports = ContestPreview;
