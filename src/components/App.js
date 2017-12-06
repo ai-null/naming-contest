@@ -5,31 +5,24 @@ import PropTypes from 'prop-types';
 import Contest from './Contest';
 import Header from './Header';
 import ContestList from './ContestList';
-import data, {contest} from '../testData';
 import * as api from '../api';
 
 const pushState = (obj, url) =>
     window.history.pushState(obj, '', url)
 
 /**
- * @returns navbar and container
+ * @returns navbar, container
  */
 export default class App extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            contests: this.props.initialData
-        };
-    }
-
     static propTypes = {
         initialData: PropTypes.object.isRequired   
     }
     
+    state = this.props.initialData
+
     /**
-     * fetchContest will trigger if the url changed to 
-     * /contest/{id-of-data}
+     * fetchContest will trigger if the contestList clicked 
+     * then the url will change to /contest/{id-of-data}
      * 
      * @param {*params for id of data} fetchContest
      * @returns Parsing data of the contest
@@ -45,13 +38,12 @@ export default class App extends Component {
             `/contest/${contestId}`
         );
 
-        api.fetchContest(contestId).then(resp => {
+        api.fetchContest(contestId).then(contest => {
             this.setState({
-                // Brand: this.pageHeader(),
-                currentContestId: contestId,
+                currentContestId: contest.id,
                 contests: {
-                    ...this.state.contests[contestId],
-                    [resp.id]: resp
+                    ...this.state.contests,
+                    [contest.id]: contest
                 }
             })
             // console.log(resp)
@@ -70,7 +62,7 @@ export default class App extends Component {
 
     /**
      * if the fetchContest was not clicked, it will return the ContestList
-     * if clicked, will return Contest
+     * if clicked, will return Contest description
      */
     currentContent() {
         if (this.state.currentContestId) {

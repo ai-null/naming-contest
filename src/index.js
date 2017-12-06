@@ -6,6 +6,6 @@ import App from './components/App';
 
 // // debugger
 ReactDom.render(
-    <App initialData={window.initialData.contest} />,
+    <App initialData={window.initialData} />,
     document.getElementById('root')
 );

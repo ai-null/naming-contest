@@ -3,9 +3,11 @@ import nodeSass from 'node-sass-middleware';
 import path from 'path';
 
 // import data, { contest } from './src/testData.json';
-import config, { port, host } from './config';
+import config, { port, host, ServerUrl } from './config';
 import api from './api/index';
 import index from './route/index';
+import serverRender from './serverRender';
+
 
 var app = express();
 
@@ -19,9 +21,32 @@ app.use(nodeSass({
 }));
 
 //Router
-app.use('/', index)
-app.use('/api', api)
+// app.use('/', index)
+// var router = express.Router();
 
+app.get(['/', '/contest/:contestId'], (req, res) => {
+    /**
+     * serverRender
+     * @param {*url} req.params.contestId
+     * 
+     * for more information look at the serverRender.js
+     */
+
+    // debugger
+    // console.log(req.params.contestId)
+    serverRender(req.params.contestId)
+        .then(({ initialMarkup, initialData }) => {
+            res.render('index', {
+                title: 'Hello React',
+                favicon: `/img/favicon.ico`,
+                initialMarkup,
+                initialData
+            });
+        })
+        .catch(err => console.log(err))
+});
+
+app.use('/api', api)
 app.use(express.static('public'));
 
 app.listen(config.port, config.host,() => {

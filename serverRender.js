@@ -8,24 +8,24 @@ import App from './src/components/App';
 
 const getApiUrl = contestId => {
     if (contestId) {
-        return `${ServerUrl}/api/contest/${contestId}`
+        return `${ServerUrl}/api/contest/${contestId}`;
     }
 
-    return `${ServerUrl}/api/contest`
+    return `${ServerUrl}/api/contest`;
 }
 
 const getInitialData = ( contestId, apiData ) => {
     if (contestId) {
         return {
             currentContestId: apiData.id,
-            contest: {
+            contests: {
                 [apiData.id]: apiData
             }
         }
     }
 
     return {
-        contest: apiData.data
+        contests: apiData.data
     }
 }
 
@@ -45,6 +45,7 @@ const serverRender = (contestId) =>
                 initialMarkup: ReactDOMServer.renderToString(
                     <App initialData={initialData} />,
                 ),
+                
                 // JSON.stringify
                 initialData
             }

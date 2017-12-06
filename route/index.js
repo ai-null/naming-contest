@@ -1,12 +1,12 @@
 import express from 'express';
-import data from '../src/testData'
 import { ServerUrl } from '../config';
 
+var app = express();
 var router = express.Router();
 
 import serverRender from '../serverRender';
 
-router.get(['/', '/contest/:contestId'], (req, res) => {
+app.get(['/', '/contest/:contestId'], (req, res) => {
     /**
      * serverRender
      * @param {*url} req.params.contestId
@@ -15,7 +15,7 @@ router.get(['/', '/contest/:contestId'], (req, res) => {
      */
 
     // debugger
-    console.log(req.params.contestId)
+    // console.log(req.params.contestId)
     serverRender(req.params.contestId)
         .then(({ initialMarkup, initialData }) => {
             res.render('index', {
