@@ -14,11 +14,17 @@ const pushState = (obj, url) =>
  * @returns navbar, container
  */
 export default class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            ...this.props.initialData
+        };
+    }
+    
     static propTypes = {
         initialData: PropTypes.object.isRequired   
     }
     
-    state = this.props.initialData
 
     /**
      * fetchContest will trigger if the contestList clicked 
