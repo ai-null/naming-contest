@@ -16,7 +16,7 @@ export default class Contest extends Component {
                 </section>
                 <div className="btn btn-default link" 
                      style={this.style}
-                     onClick={this.props.contestListClick}>
+                      onClick={this.props.backToHomeBtn}>
                     Back to home
                 </div>
             </div>
@@ -26,5 +26,5 @@ export default class Contest extends Component {
 
 Contest.propTypes = {
     description: PropTypes.string.isRequired,
-    contestListClick: PropTypes.func.isRequired
+    backToHomeBtn: PropTypes.func.isRequired
 }

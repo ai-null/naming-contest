@@ -56,18 +56,17 @@ export default class App extends Component {
         })
     }
 
-    fetchContestList = () => {
+    backToHome = () => {
         pushState(
             {currentId: null},
             '/'
         );
 
-        api.fetchContestList().then(contests => {
+        api.backToHome().then( contests => {
             this.setState({
                 currentContestId: null,
                 contests
             })
-            // console.log(resp)
         })
     }
 
@@ -82,13 +81,13 @@ export default class App extends Component {
     }
 
     /**
-     * if the fetchContest was not clicked, it will return the ContestList
+     * if the fetchContest not clicked, it will return the ContestList
      * if clicked, will return Contest description
      */
     currentContent() {
         if (this.state.currentContestId) {
             return <Contest 
-                    contestListClick={ this.fetchContestList }
+                    backToHomeBtn={ this.backToHome }
                     { ...this.currentContest() }  />
         }
 
