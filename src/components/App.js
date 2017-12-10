@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -56,6 +56,21 @@ export default class App extends Component {
         })
     }
 
+    fetchContestList = () => {
+        pushState(
+            {currentId: null},
+            '/'
+        );
+
+        api.fetchContestList().then(contests => {
+            this.setState({
+                currentContestId: null,
+                contests
+            })
+            // console.log(resp)
+        })
+    }
+
     currentContest(){
         return this.state.contests[this.state.currentContestId];
     }
@@ -72,7 +87,9 @@ export default class App extends Component {
      */
     currentContent() {
         if (this.state.currentContestId) {
-            return <Contest { ...this.currentContest() }  />
+            return <Contest 
+                    contestListClick={ this.fetchContestList }
+                    { ...this.currentContest() }  />
         }
 
         return <ContestList 

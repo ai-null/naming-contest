@@ -20,8 +20,8 @@ const ContestList = ({contest, onContestClick}) => (
     </div>
 )
 
-ContestList.protTypes = {
-    contest: propTypes.object,
+ContestList.propTypes = {
+    contest: object,
     onContestClick: propTypes.func.isRequired
 }
 
