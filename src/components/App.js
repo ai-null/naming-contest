@@ -33,8 +33,12 @@ export default class App extends Component {
         onPopState((evt) => {
             this.setState({
                 currentContestId: (evt.state || {}).currentContestId
-            })
-        })
+            });
+        });
+    }
+
+    componentWillUnmount() {
+        onPopState(null);
     }
     
 
