@@ -7,8 +7,12 @@ import Header from './Header';
 import ContestList from './ContestList';
 import * as api from '../api';
 
+// function handlers
 const pushState = (obj, url) =>
     window.history.pushState(obj, '', url)
+
+const onPopState = handler =>
+    window.onpopstate = handler;
 
 /**
  * @returns navbar, container
@@ -23,6 +27,14 @@ export default class App extends Component {
     
     static propTypes = {
         initialData: PropTypes.object.isRequired   
+    }
+
+    componentDidMount() {
+        onPopState((evt) => {
+            this.setState({
+                currentContestId: (evt.state || {}).currentContestId
+            })
+        })
     }
     
 
@@ -40,7 +52,7 @@ export default class App extends Component {
     fetchContest = (contestId) => {
         // // debugger
         pushState(
-            {currentId: contestId},
+            {currentContestId: contestId},
             `/contest/${contestId}`
         );
 
@@ -58,7 +70,7 @@ export default class App extends Component {
 
     backToHome = () => {
         pushState(
-            {currentId: null},
+            {currentContestId: null},
             '/'
         );
 
