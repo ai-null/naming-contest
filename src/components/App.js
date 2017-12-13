@@ -40,7 +40,6 @@ export default class App extends Component {
     componentWillUnmount() {
         onPopState(null);
     }
-    
 
     /**
      * fetchContest will trigger if the contestList clicked 
@@ -86,6 +85,25 @@ export default class App extends Component {
         })
     }
 
+    fetchNames = (nameIds) => {
+        api.nameIds(nameIds).then(names => {
+            this.setState({
+                names
+            })
+        })
+    }
+
+    lookupNames = (nameIds) => {
+        //... what if i dont have a names on the state ?
+        if (!this.state.names || !this.state.names[nameIds]) {
+            return {
+                name: '...'
+            }
+        }
+
+        return this.state.names[nameIds];
+    }
+
     currentContest(){
         return this.state.contests[this.state.currentContestId];
     }
@@ -102,8 +120,10 @@ export default class App extends Component {
      */
     currentContent() {
         if (this.state.currentContestId) {
-            return <Contest 
+            return <Contest
                     backToHomeBtn={ this.backToHome }
+                    fetchNameList={ this.fetchNames }
+                    lookupNames={ this.lookupNames }
                     { ...this.currentContest() }  />
         }
 
