@@ -1,6 +1,7 @@
 import express from 'express';
 import nodeSass from 'node-sass-middleware';
 import path from 'path';
+import bodyParser from 'body-parser';
 
 // import data, { contest } from './src/testData.json';
 import config, { port, host, ServerUrl } from './config';
@@ -15,6 +16,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(bodyParser.json())
 app.use(nodeSass({
     src: path.join(__dirname + '/sass'), 
     dest: path.join(__dirname + '/public')

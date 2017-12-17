@@ -1,7 +1,8 @@
 import express from 'express';
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectID } from 'mongodb';
 import assert from 'assert';
 import config from '../config';
+import bodyParser from 'body-parser';
 // same as data.contest
 // import { contest } from '../src/testData.json';
 
@@ -24,7 +25,6 @@ Router.get('/contest', (req, res) => {
 
     mdb.collection('contests').find({})
         .project({
-            id: 1,
             categoryName: 1,
             contestName: 1
         })
@@ -36,7 +36,7 @@ Router.get('/contest', (req, res) => {
                 return
             }
 
-            contests[contest.id] = contest;
+            contests[contest._id] = contest;
         })
 });
 
@@ -47,10 +47,10 @@ Router.get('/names/:nameIds', (req, res) => {
      * App.js - line 97
      */
     // setTimeout(() => {
-        const nameIds = req.params['nameIds'].split(',').map(Number)
+        const nameIds = req.params['nameIds'].split(',').map(ObjectID)
         let names = {}
     
-        mdb.collection('names').find({id: { $in: nameIds}})
+        mdb.collection('names').find({_id: { $in: nameIds}})
             .each((err, name) => {
                 assert.equal(null, err);
     
@@ -58,16 +58,39 @@ Router.get('/names/:nameIds', (req, res) => {
                     res.send({ names: names })
                     return;
                 }
-                names[name.id] = name;
+                names[name._id] = name;
             })
     // }, 2000);
 });
 
 Router.get('/contest/:contestId', (req, res) => {
     mdb.collection('contests')
-        .findOne({ id: parseInt(req.params.contestId) })
+        .findOne({ _id: ObjectID(req.params.contestId) })
         .then(contest => res.send(contest))
         .catch(err => console.log(err))
+});
+
+Router.post('/names', (req, res) => {
+    const contestId = ObjectID(req.body['contestId']);
+    const name = req.body.newName;
+
+    mdb.collection('names').insertOne({ name }).then(result => 
+        mdb.collection('contests').findAndModify(
+            { _id: contestId },
+            [],
+            { $push: { nameIds: result.insertedId } },
+            { new: true }
+        ).then(doc => {
+            res.send({
+                updatedContest: doc.value,
+                newName: { _id: result.insertedId, name }
+            })
+        })
+    )
+    .catch(err => {
+        console.error(err)
+        res.status(404, ' Sorry can\'t find that ')
+    })
 });
 
 export default Router;

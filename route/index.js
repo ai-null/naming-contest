@@ -1,12 +1,12 @@
-import express from 'express';
+import express, { Router } from 'express';
 import { ServerUrl } from '../config';
 
 var app = express();
-var router = express.Router();
+var router = Router();
 
 import serverRender from '../serverRender';
 
-app.get(['/', '/contest/:contestId'], (req, res) => {
+router.get(['/', '/contest/:contestId'], (req, res) => {
     /**
      * serverRender
      * @param {*url} req.params.contestId
@@ -25,7 +25,9 @@ app.get(['/', '/contest/:contestId'], (req, res) => {
                 initialData
             });
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+        })
 });
 
 module.exports = router;

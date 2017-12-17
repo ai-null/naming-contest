@@ -1,15 +1,23 @@
 import React ,{ Component } from 'react';
 import PropTypes from 'prop-types';
+import config, { ServerUrl } from '../../config'
 
 
 export default class Contest extends Component {
+    style = {
+        marginTop: '2rem',
+        color: 'blue'
+    }
+
     componentDidMount() {
         this.props.fetchNameList(this.props.nameIds)
     }
     
-    style = {
-        marginTop: '2rem',
-        color: 'blue'
+    handleSubmit = (e) => {
+        var input = this.refs.newName;
+        e.preventDefault();
+        this.props.addName(input.value, this.props._id);
+        input.value = '';
     }
 
     render() {
@@ -39,18 +47,23 @@ export default class Contest extends Component {
                     </div>    
                 </div>
 
-                <div className="panel panel-default">
+                <div className="panel panel-default">                    
                     <div className="panel-heading bg">
                         <div className="panel-title"> Proposed a new Names </div>
                     </div>
                     <div className="panel-body">
-                        <div className="input-group">
-                            <input type="text" className="form-control" placeholder="Propose a new name" />
-                            <div className="input-group-btn">
-                                <button className="btn btn-submit bg-primary"> Submit </button>
+                        <form 
+                            onSubmit={this.handleSubmit}>
+                            <div className="input-group">
+                                <input type="text" className="form-control" 
+                                        placeholder="Propose a new name"
+                                        ref="newName"/>
+                                <div className="input-group-btn">
+                                    <button className="btn btn-submit bg-primary"> Submit </button>
+                                </div>
                             </div>
-                        </div>
-                    </div>    
+                        </form>
+                    </div>
                 </div>
 
                 <div className="btn btn-default link" 

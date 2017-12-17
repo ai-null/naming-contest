@@ -32,7 +32,8 @@ export default class App extends Component {
     componentDidMount() {
         onPopState((evt) => {
             this.setState({
-                currentContestId: (evt.state || {}).currentContestId
+                currentContestId: (evt.state || {}).currentContestId,
+                // names: null
             });
         });
     }
@@ -61,14 +62,29 @@ export default class App extends Component {
 
         api.fetchContest(contestId).then(contest => {
             this.setState({
-                currentContestId: contest.id,
+                currentContestId: contest._id,
                 contests: {
                     ...this.state.contests,
-                    [contest.id]: contest
+                    [contest._id]: contest
                 }
             })
             // console.log(resp)
         })
+    }
+
+    addNewName = (name, updatedId) => {
+        api.addName(name, updatedId).then(resp => 
+            this.setState({
+                contests: {
+                    ...this.state.contest,
+                    [resp.updatedContest._id]: resp.updatedContest
+                },
+                names: {
+                    ...this.state.names,
+                    [resp.newName._id]: resp.newName
+                }
+            })
+        ).catch(err => console.error(err))
     }
 
     backToHome = () => {
@@ -86,6 +102,7 @@ export default class App extends Component {
     }
 
     fetchNames = (nameIds) => {
+        if (nameIds.length === 0) return;
         api.nameIds(nameIds).then(names => {
             this.setState({
                 names
@@ -124,6 +141,7 @@ export default class App extends Component {
                     backToHomeBtn={ this.backToHome }
                     fetchNameList={ this.fetchNames }
                     lookupNames={ this.lookupNames }
+                    addName={ this.addNewName }
                     { ...this.currentContest() }  />
         }
 
