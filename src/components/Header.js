@@ -13,15 +13,15 @@ const Header = ({Brand}) => {
             <div className="navbar-brand"> { Brand } </div>
         </div>
     );
-}
+};
 
 // Default props value
 Header.defaultProps = {
     Brand: 'Naming Contest',
-}
+};
 
 Header.propTypes = {
-    Brand: propTypes.string.isRequired
-}
+    Brand: propTypes.string.isRequired,
+};
 
 module.exports = Header;
