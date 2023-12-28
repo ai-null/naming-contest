@@ -2,6 +2,10 @@ body{
     background: #fafafa
 }
 
+input {
+    color: rgba(35, 37, 39, 0.884)
+}
+
 .link {
     cursor: pointer
 }
@@ -16,6 +20,10 @@ body{
 
 .contest {
     margin-top: 10.5rem
+}
+
+.panel-heading.bg {
+    background-color: rgba(74, 124, 170, 0.918) !important;
 }
 
 .contestPreview.container {
